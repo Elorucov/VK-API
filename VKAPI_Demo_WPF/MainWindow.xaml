@@ -1,0 +1,30 @@
+﻿<Window x:Class="VKAPI_Demo_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VKAPI_Demo_WPF"
+        mc:Ignorable="d"
+        Title="VKAPI Demo" Height="450" Width="800">
+    <Grid Margin="6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="uid" Margin="6" ToolTip="User ID"/>
+            <PasswordBox x:Name="token" Grid.Column="1" Margin="6" ToolTip="Access token"/>
+            <Button Grid.Column="2" Margin="6" Content="Set" Click="SetToken"/>
+        </Grid>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+                <Button Margin="6" Content="captcha.force" Click="Captcha_Force"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

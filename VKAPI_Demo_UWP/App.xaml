@@ -1,0 +1,7 @@
+﻿<Application
+    x:Class="VKAPI_Demo_UWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VKAPI_Demo_UWP">
+
+</Application>

@@ -1,0 +1,14 @@
+﻿<Window x:Class="VKAPI_Demo_WPF.Dialogs.CaptchaDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VKAPI_Demo_WPF.Dialogs"
+        mc:Ignorable="d"
+        Title="Enter captcha" Width="320" SizeToContent="Height">
+    <StackPanel Margin="6">
+        <Image x:Name="img" Margin="6" HorizontalAlignment="Stretch" Stretch="Uniform" MaxHeight="96"/>
+        <TextBox x:Name="cptch" Margin="6"/>
+        <Button Margin="6" Content="Send" Click="Send"/>
+    </StackPanel>
+</Window>
