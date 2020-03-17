@@ -18,5 +18,14 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("captcha_img")]
         public string CaptchaImage { get; set; }
+
+        [JsonProperty("redirect_url")]
+        public string RedirectUrl { get; set; }
+
+        [JsonIgnore]
+        public Uri RedirectUri { get { return new Uri(RedirectUrl); }  }
+
+        [JsonProperty("confirmation_text")]
+        public string ConfirmationText { get; set; }
     }
 }

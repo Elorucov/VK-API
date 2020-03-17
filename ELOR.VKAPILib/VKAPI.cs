@@ -17,15 +17,16 @@ namespace ELOR.VKAPILib {
 
         #region Methods
 
-        public UsersMethods Users { get; private set; }
         public GroupsMethods Groups { get; private set; }
         public MessagesMethods Messages { get; private set; }
+        public UsersMethods Users { get; private set; }
 
         #endregion
 
         #region Properties
 
         public Func<CaptchaHandlerData, Task<string>> CaptchaHandler { get; set; }
+        public Func<string, Task<bool>> ActionConfirmationHandler { get; set; }
 
         #endregion
 
@@ -47,15 +48,23 @@ namespace ELOR.VKAPILib {
 
         #endregion
 
+        #region Events
+
+        public event EventHandler UserAuthorizationFailed;
+        public event EventHandler<Uri> ValidationRequired;
+        public event EventHandler UserDeletedOrBanned;
+
+        #endregion
+
         public VKAPI(int userId, string accessToken, string language, string domain = "api.vk.com") {
             _userId = userId;
             _accessToken = accessToken;
             _language = language;
             _domain = domain;
 
-            Users = new UsersMethods(this);
-            Groups = new GroupsMethods(this);
+            Groups = new GroupsMethods(this, "groups");
             Messages = new MessagesMethods(this, "messages");
+            Users = new UsersMethods(this, "users");
         }
 
         private Dictionary<string, string> GetNormalizedParameters(Dictionary<string, string> parameters) {
@@ -106,8 +115,14 @@ namespace ELOR.VKAPILib {
             JObject jr = JObject.Parse(response);
             if(jr["error"] != null) {
                 APIException apiex = JsonConvert.DeserializeObject<APIException>(jr["error"].ToString(Formatting.None));
-                if(apiex.Code != 14) throw apiex;
-                return await HandleCaptchaRequest<T>(apiex, method, parameters).ConfigureAwait(false);
+                switch(apiex.Code) {
+                    case 5: UserAuthorizationFailed?.Invoke(this, null); throw apiex;
+                    case 14: return await HandleCaptchaRequest<T>(apiex, method, parameters).ConfigureAwait(false);
+                    case 17: ValidationRequired?.Invoke(this, apiex.RedirectUri); throw apiex;
+                    case 18: UserDeletedOrBanned?.Invoke(this, null); throw apiex;
+                    case 24: return await HandleActionConfirmationRequest<T>(apiex, method, parameters).ConfigureAwait(false);
+                    default: throw apiex;
+                }
             } else if(jr["response"] != null) {
                 return JsonConvert.DeserializeObject<T>(jr["response"].ToString(Formatting.None));
             } else {
@@ -126,6 +141,17 @@ namespace ELOR.VKAPILib {
                 if (String.IsNullOrEmpty(key)) throw apiex;
                 parameters.Add("captcha_sid", apiex.CaptchaSID);
                 parameters.Add("captcha_key", key);
+                return await CallMethodAsync<T>(method, parameters).ConfigureAwait(false);
+            } else {
+                throw apiex;
+            }
+        }
+
+        private async Task<T> HandleActionConfirmationRequest<T>(APIException apiex, string method, Dictionary<string, string> parameters) {
+            if(ActionConfirmationHandler != null) {
+                bool result = await ActionConfirmationHandler.Invoke(apiex.ConfirmationText);
+                if(!result) throw apiex;
+                parameters.Add("confirm", "1");
                 return await CallMethodAsync<T>(method, parameters).ConfigureAwait(false);
             } else {
                 throw apiex;
