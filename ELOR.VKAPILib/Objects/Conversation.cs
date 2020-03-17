@@ -142,7 +142,6 @@ namespace ELOR.VKAPILib.Objects {
         [JsonProperty("acl")]
         public ChatACL ACL { get; set; }
 
-
         [JsonProperty("is_group_channel")]
         public bool IsGroupChannel { get; set; }
 
@@ -230,11 +229,17 @@ namespace ELOR.VKAPILib.Objects {
         [JsonProperty("id")]
         public int Id { get; set; }
 
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
         [JsonProperty("title")]
         public string Title { get; set; }
 
         [JsonProperty("admin_id")]
         public int AdminId { get; set; }
+
+        [JsonProperty("users")]
+        public List<int> Users { get; set; }
 
         [JsonProperty("members_count")]
         public int MembersCount { get; set; }
@@ -244,6 +249,12 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("photo_200")]
         public string Photo { get; set; }
+
+        [JsonProperty("left")]
+        public bool Left { get; set; }
+
+        [JsonProperty("kicked")]
+        public bool Kicked { get; set; }
     }
 
     public class ChatLink {

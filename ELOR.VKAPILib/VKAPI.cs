@@ -97,12 +97,8 @@ namespace ELOR.VKAPILib {
                 using (HttpRequestMessage hmsg = new HttpRequestMessage(HttpMethod.Post, new Uri(requestUri))) {
                     hmsg.Content = new FormUrlEncodedContent(parameters);
                     using (var resp = await httpClient.SendAsync(hmsg)) {
-                        if (resp.IsSuccessStatusCode) {
-                            string response = await resp.Content.ReadAsStringAsync();
-                            return response;
-                        } else {
-                            throw new Exception($"API server returns http-error: {(int)resp.StatusCode} {resp.StatusCode}.");
-                        }
+                        resp.EnsureSuccessStatusCode();
+                        return await resp.Content.ReadAsStringAsync();
                     }
                 }
             }
