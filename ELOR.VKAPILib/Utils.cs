@@ -11,7 +11,11 @@ namespace ELOR.VKAPILib {
         public static string ToEnumMemberAttribute(this Enum @enum) {
             var t = @enum.GetType().GetTypeInfo();
             EnumMemberAttribute ema = null;
-            t.DeclaredMembers.ToList().ForEach(k => ema = k.Name == @enum.ToString() ? (EnumMemberAttribute)k.GetCustomAttribute(typeof(EnumMemberAttribute)) : null);
+            t.DeclaredMembers.ToList().ForEach(k => {
+                if(k.Name == @enum.ToString()) {
+                    ema = (EnumMemberAttribute)k.GetCustomAttribute(typeof(EnumMemberAttribute));
+                }
+            });
             if (ema == null) return @enum.ToString();
             return ema.Value;
         }

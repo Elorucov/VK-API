@@ -59,5 +59,12 @@ namespace VKAPI_Demo_WPF {
             await API?.CallMethodAsync<string>("captcha.force");
             (sender as Button).IsEnabled = true;
         }
+
+        private async void Users_Get(object sender, RoutedEventArgs e) {
+            (sender as Button).IsEnabled = false;
+            var user = await API.Users.GetAsync(API.UserId, new List<string> { "online", "photo_max_orig" }, ELOR.VKAPILib.Methods.NameCase.Nom);
+            MessageBox.Show($"ID: {user.Id}\nName: {user.FirstName}\nLast: {user.LastName}", "Result");
+            (sender as Button).IsEnabled = true;
+        }
     }
 }

@@ -24,6 +24,7 @@
         <ScrollViewer Grid.Row="1">
             <StackPanel>
                 <Button Margin="6" Content="captcha.force" Click="Captcha_Force"/>
+                <Button Margin="6" Content="users.get" Click="Users_Get"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>
