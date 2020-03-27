@@ -1,4 +1,5 @@
-﻿using ELOR.VKAPILib.Methods;
+﻿using ELOR.VKAPILib.Attributes;
+using ELOR.VKAPILib.Methods;
 using ELOR.VKAPILib.Objects;
 using ELOR.VKAPILib.Objects.HandlerDatas;
 using Newtonsoft.Json;
@@ -9,6 +10,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,14 +26,14 @@ namespace ELOR.VKAPILib {
 
         #endregion
 
-        #region Properties
+        #region Funcs
 
         public Func<CaptchaHandlerData, Task<string>> CaptchaHandler { get; set; }
         public Func<string, Task<bool>> ActionConfirmationHandler { get; set; }
 
         #endregion
 
-        #region Fields
+        #region Fields & Properties
 
         private int _userId;
         private string _accessToken;
@@ -43,6 +46,7 @@ namespace ELOR.VKAPILib {
         public string Language { get { return _language; } }
         public string Domain { get { return _domain; } }
         public string Version { get { return _version; } }
+        public int LongPollVersion { get; set; } = 11;
 
         public static string UserAgent { get; set; }
 
@@ -62,9 +66,9 @@ namespace ELOR.VKAPILib {
             _language = language;
             _domain = domain;
 
-            Groups = new GroupsMethods(this, "groups");
-            Messages = new MessagesMethods(this, "messages");
-            Users = new UsersMethods(this, "users");
+            Groups = new GroupsMethods(this);
+            Messages = new MessagesMethods(this);
+            Users = new UsersMethods(this);
         }
 
         private Dictionary<string, string> GetNormalizedParameters(Dictionary<string, string> parameters) {
@@ -102,6 +106,21 @@ namespace ELOR.VKAPILib {
                     }
                 }
             }
+        }
+
+        public async Task<T> CallMethodAsync<T>(MethodsSectionBase methodClass, Dictionary<string, string> parameters = null, [CallerMemberName] string callerName = "") {
+            var s = methodClass.GetType().GetTypeInfo();
+            SectionAttribute si = s.GetCustomAttribute<SectionAttribute>();
+            MethodInfo m = null;
+            foreach (var mm in s.DeclaredMethods) {
+                if (mm.Name == callerName) {
+                    m = mm; break;
+                }
+            }
+            if(m == null) throw new Exception("Failed to get member info!");
+            MethodAttribute mi = m.GetCustomAttribute<MethodAttribute>();
+            string method = $"{si.Name}.{mi.Name}";
+            return await CallMethodAsync<T>(method, parameters);
         }
 
         public async Task<T> CallMethodAsync<T>(string method, Dictionary<string, string> parameters = null) {

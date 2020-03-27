@@ -18,15 +18,7 @@ namespace ELOR.VKAPILib.Objects {
     }
 
     public class ConversationAttachmentsResponse : VKList<ConversationAttachment> {
-        public int Count { get { return Items.Count; } }
-
-        [JsonProperty("profiles")]
-        public List<User> Profiles { get; set; }
-
         [JsonProperty("next_from")]
         public string NextFrom { get; set; }
-
-        [JsonProperty("groups")]
-        public List<Group> Groups { get; set; }
     }
 }

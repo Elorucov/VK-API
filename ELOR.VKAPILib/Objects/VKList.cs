@@ -12,5 +12,11 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("items")]
         public List<T> Items { get; set; }
+
+        [JsonProperty("profiles")]
+        public List<User> Profiles { get; set; }
+
+        [JsonProperty("groups")]
+        public List<Group> Groups { get; set; }
     }
 }

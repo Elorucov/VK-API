@@ -35,5 +35,11 @@ namespace ELOR.VKAPILib {
         internal static string Combine(this List<string> items, char sym = ',') {
             return String.Join(sym.ToString(), items);
         }
+
+        internal static string ToVKFormat(this DateTime d) {
+            string ds = d.Day <= 9 ? $"0{d.Day}" : d.Day.ToString();
+            string ms = d.Month <= 9 ? $"0{d.Month}" : d.Month.ToString();
+            return $"{ds}{ms}{d.Year}";
+        }
     }
 }

@@ -10,20 +10,6 @@ namespace ELOR.VKAPILib.Objects {
     public class ConversationsResponse : VKList<ConversationItem> {
         [JsonProperty("unread_count")]
         public int UnreadCount { get; set; }
-
-        [JsonProperty("profiles")]
-        public List<User> Profiles { get; set; }
-
-        [JsonProperty("groups")]
-        public List<Group> Groups { get; set; }
-    }
-
-    public class SingleConversationResponse : VKList<Conversation> {
-        [JsonProperty("profiles")]
-        public List<User> Profiles { get; set; }
-
-        [JsonProperty("groups")]
-        public List<Group> Groups { get; set; }
     }
 
     public class ConversationItem {
@@ -211,18 +197,6 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("is_admin")]
         public bool IsAdmin { get; set; }
-
-        [JsonIgnore]
-        public Uri Photo { get; set; }
-
-        [JsonIgnore]
-        public string Name { get; set; }
-
-        [JsonIgnore]
-        public string NameGen { get; set; }
-
-        [JsonIgnore]
-        public string Subtitle { get; set; }
     }
 
     public class Chat {

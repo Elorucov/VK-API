@@ -5,10 +5,8 @@ using System.Text;
 namespace ELOR.VKAPILib.Methods {
     public class MethodsSectionBase {
         internal VKAPI API;
-        internal string Section;
-        public MethodsSectionBase(VKAPI api, string section) {
+        public MethodsSectionBase(VKAPI api) {
             API = api;
-            Section = section;
         }
     }
 }
