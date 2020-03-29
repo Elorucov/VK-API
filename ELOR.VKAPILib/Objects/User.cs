@@ -45,6 +45,23 @@ namespace ELOR.VKAPILib.Objects {
         University,
     }
 
+    [DataContract]
+    public enum UserOnlineStatus {
+        Unknown,
+
+        [EnumMember(Value = "recently")]
+        Recently,
+
+        [EnumMember(Value = "last_week")]
+        LastWeek,
+
+        [EnumMember(Value = "last_month")]
+        LastMonth,
+
+        [EnumMember(Value = "long_ago")]
+        LongAgo,
+    }
+
     public class UserLastSeen {
         [JsonProperty("time")]
         public long TimeUnix { get; set; }
@@ -68,6 +85,15 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("is_mobile")]
         public bool IsMobile { get; set; }
+
+        [JsonProperty("last_seen")]
+        public long LastSeenUnix { get; set; }
+
+        [JsonIgnore]
+        public DateTime LastSeen { get { return DateTimeOffset.FromUnixTimeSeconds(LastSeenUnix).DateTime.ToLocalTime(); } }
+
+        [JsonProperty("last_seen")]
+        public UserOnlineStatus Status { get; set; }
     }
 
     public class UserCountry {
