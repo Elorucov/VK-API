@@ -92,7 +92,7 @@ namespace ELOR.VKAPILib.Objects {
         [JsonIgnore]
         public DateTime LastSeen { get { return DateTimeOffset.FromUnixTimeSeconds(LastSeenUnix).DateTime.ToLocalTime(); } }
 
-        [JsonProperty("last_seen")]
+        [JsonProperty("status")]
         public UserOnlineStatus Status { get; set; }
     }
 
