@@ -56,6 +56,20 @@ namespace ELOR.VKAPILib.Objects {
         public int Platform { get; set; }
     }
 
+    public class UserOnlineInfo {
+        [JsonProperty("visible")]
+        public bool Visible { get; set; }
+
+        [JsonProperty("is_online")]
+        public bool isOnline { get; set; }
+
+        [JsonProperty("app_id")]
+        public int AppId { get; set; }
+
+        [JsonProperty("is_mobile")]
+        public bool IsMobile { get; set; }
+    }
+
     public class UserCountry {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -209,6 +223,9 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("online_app")]
         public int OnlineAppId { get; set; }
+
+        [JsonProperty("online_info")]
+        public UserOnlineInfo OnlineInfo { get; set; }
 
         [JsonProperty("status")]
         public string Status { get; set; }

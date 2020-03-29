@@ -75,6 +75,8 @@ namespace ELOR.VKAPILib.Objects {
 
     [DataContract]
     public enum ActionType {
+        Unknown,
+
         [EnumMember(Value = "chat_photo_update")]
         ChatPhotoUpdate,
 
@@ -101,6 +103,12 @@ namespace ELOR.VKAPILib.Objects {
 
         [EnumMember(Value = "chat_invite_user_by_link")]
         ChatInviteUserByLink,
+
+        [EnumMember(Value = "chat_invite_user_by_message_request")]
+        ChatInviteUserByMessageRequest,
+
+        [EnumMember(Value = "chat_screenshot")]
+        ChatScreenshot
     }
 
     public class Action {
