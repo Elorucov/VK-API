@@ -23,6 +23,7 @@ namespace ELOR.VKAPILib {
         public GroupsMethods Groups { get; private set; }
         public MessagesMethods Messages { get; private set; }
         public UsersMethods Users { get; private set; }
+        public MethodsSectionBase Execute { get; private set; }
 
         #endregion
 
@@ -60,7 +61,7 @@ namespace ELOR.VKAPILib {
 
         #endregion
 
-        public VKAPI(int userId, string accessToken, string language, string domain = "api.vk.com") {
+        public VKAPI(int userId, string accessToken, string language, Type executeClass = null, string domain = "api.vk.com") {
             _userId = userId;
             _accessToken = accessToken;
             _language = language;
@@ -69,6 +70,11 @@ namespace ELOR.VKAPILib {
             Groups = new GroupsMethods(this);
             Messages = new MessagesMethods(this);
             Users = new UsersMethods(this);
+            if (executeClass != null) {
+                if (executeClass.GetTypeInfo().BaseType == typeof(MethodsSectionBase)) {
+                    Execute = (MethodsSectionBase)Activator.CreateInstance(executeClass, new object[] { this });
+                }
+            }
         }
 
         private Dictionary<string, string> GetNormalizedParameters(Dictionary<string, string> parameters) {

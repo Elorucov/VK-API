@@ -259,6 +259,9 @@ namespace ELOR.VKAPILib.Objects {
         [JsonProperty("site")]
         public string Site { get; set; }
 
+        [JsonProperty("mobile_phone")]
+        public string MobilePhone { get; set; }
+
         [JsonProperty("verified")]
         public int Verified { get; set; }
     }
