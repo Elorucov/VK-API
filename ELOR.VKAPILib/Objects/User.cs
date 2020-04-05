@@ -200,16 +200,16 @@ namespace ELOR.VKAPILib.Objects {
         public UserOccupation Occupation { get; set; }
 
         [JsonProperty("blacklisted")]
-        public int Blacklisted { get; set; }
+        public bool Blacklisted { get; set; }
 
         [JsonProperty("blacklisted_by_me")]
-        public int BlacklistedByMe { get; set; }
+        public bool BlacklistedByMe { get; set; }
 
         [JsonProperty("can_send_friend_request")]
-        public int CanSendFriendRequest { get; set; }
+        public bool CanSendFriendRequest { get; set; }
 
         [JsonProperty("can_write_private_message")]
-        public int CanWritePrivateMessage { get; set; }
+        public bool CanWritePrivateMessage { get; set; }
 
         [JsonProperty("last_seen")]
         public UserLastSeen LastSeen { get; set; }
