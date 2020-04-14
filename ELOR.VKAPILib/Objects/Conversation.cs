@@ -175,6 +175,12 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("chat_settings")]
         public ChatSettings ChatSettings { get; set; }
+
+        [JsonProperty("is_disappearing")]
+        public bool IsDisappearing { get; set; }
+
+        [JsonProperty("theme")]
+        public string Theme { get; set; }
     }
 
     // Chat

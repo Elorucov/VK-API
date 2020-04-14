@@ -187,5 +187,11 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("template")]
         public BotTemplate Template { get; set; }
+
+        [JsonProperty("expire_ttl")]
+        public int ExpireTTL { get; set; }
+
+        [JsonProperty("is_expired")]
+        public bool IsExpired { get; set; }
     }
 }
