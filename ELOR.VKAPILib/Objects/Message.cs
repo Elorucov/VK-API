@@ -191,6 +191,9 @@ namespace ELOR.VKAPILib.Objects {
         [JsonProperty("expire_ttl")]
         public int ExpireTTL { get; set; }
 
+        [JsonProperty("ttl")]
+        public int TTL { get; set; }
+
         [JsonProperty("is_expired")]
         public bool IsExpired { get; set; }
     }
