@@ -22,6 +22,7 @@ namespace ELOR.VKAPILib {
 
         public GroupsMethods Groups { get; private set; }
         public MessagesMethods Messages { get; private set; }
+        public PhotosMethods Photos { get; private set; }
         public UsersMethods Users { get; private set; }
         public MethodsSectionBase Execute { get; private set; }
 
@@ -69,6 +70,7 @@ namespace ELOR.VKAPILib {
 
             Groups = new GroupsMethods(this);
             Messages = new MessagesMethods(this);
+            Photos = new PhotosMethods(this);
             Users = new UsersMethods(this);
             if (executeClass != null) {
                 if (executeClass.GetTypeInfo().BaseType == typeof(MethodsSectionBase)) {
