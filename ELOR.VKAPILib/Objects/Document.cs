@@ -64,5 +64,10 @@ namespace ELOR.VKAPILib.Objects
 
         [JsonIgnore]
         public Size PreviewImageSize { get { return Preview.Photo.PreviewImageSize; } }
+
+        public override string ToString() {
+            string ak = String.IsNullOrEmpty(AccessKey) ? "" : $"_{AccessKey}";
+            return $"doc{OwnerId}_{Id}{ak}";
+        }
     }
 }

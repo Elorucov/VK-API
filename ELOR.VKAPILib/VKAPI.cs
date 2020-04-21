@@ -20,10 +20,12 @@ namespace ELOR.VKAPILib {
 
         #region Methods
 
+        public DocsMethods Docs { get; set; }
         public GroupsMethods Groups { get; private set; }
         public MessagesMethods Messages { get; private set; }
         public PhotosMethods Photos { get; private set; }
         public UsersMethods Users { get; private set; }
+        public VideoMethods Video { get; private set; }
         public MethodsSectionBase Execute { get; private set; }
 
         #endregion
@@ -68,10 +70,12 @@ namespace ELOR.VKAPILib {
             _language = language;
             _domain = domain;
 
+            Docs = new DocsMethods(this);
             Groups = new GroupsMethods(this);
             Messages = new MessagesMethods(this);
             Photos = new PhotosMethods(this);
             Users = new UsersMethods(this);
+            Video = new VideoMethods(this);
             if (executeClass != null) {
                 if (executeClass.GetTypeInfo().BaseType == typeof(MethodsSectionBase)) {
                     Execute = (MethodsSectionBase)Activator.CreateInstance(executeClass, new object[] { this });
@@ -87,8 +91,8 @@ namespace ELOR.VKAPILib {
             }
 
             prmkv.Add("access_token", AccessToken);
-            prmkv.Add("lang", Language);
-            prmkv.Add("v", Version);
+            if (!prmkv.ContainsKey("lang")) prmkv.Add("lang", Language);
+            if (!prmkv.ContainsKey("v")) prmkv.Add("v", Version);
 
             return prmkv;
         }

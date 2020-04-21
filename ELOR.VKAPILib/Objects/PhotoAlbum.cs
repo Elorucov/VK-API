@@ -6,18 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ELOR.VKAPILib.Objects {
-    public class PhotoAlbum {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
+    public class PhotoAlbum : Album {
         [JsonProperty("thumb_id")]
         public int ThumbId { get; set; }
-
-        [JsonProperty("owner_id")]
-        public int OwnerId { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
 
         [JsonProperty("description")]
         public string Description { get; set; }
