@@ -43,16 +43,16 @@ namespace ELOR.VKAPILib {
         private string _accessToken;
         private string _language;
         private string _domain;
-        private string _version = "5.123";
+        private static string _version = "5.123";
 
         public int UserId { get { return _userId; } }
         public string AccessToken { get { return _accessToken; } }
         public string Language { get { return _language; } }
         public string Domain { get { return _domain; } }
-        public string Version { get { return _version; } }
         public int LongPollVersion { get; set; } = 11;
 
         public static string UserAgent { get; set; }
+        public static string Version { get { return _version; } }
 
         #endregion
 
