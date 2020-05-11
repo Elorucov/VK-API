@@ -107,7 +107,7 @@ namespace ELOR.VKAPILib.Objects {
         public string Activity { get; set; }
 
         [JsonProperty("can_message")]
-        public int CanMessage { get; set; }
+        public bool CanMessage { get; set; }
 
         [JsonProperty("city")]
         public UserCountry City { get; set; }
