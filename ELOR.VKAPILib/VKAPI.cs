@@ -113,7 +113,7 @@ namespace ELOR.VKAPILib {
                 using (HttpRequestMessage hmsg = new HttpRequestMessage(HttpMethod.Post, new Uri(requestUri))) {
                     hmsg.Content = new FormUrlEncodedContent(parameters);
                     using (var resp = await httpClient.SendAsync(hmsg)) {
-                        resp.EnsureSuccessStatusCode();
+                        await resp.EnsureSuccessStatusCodeAsync();
                         return await resp.Content.ReadAsStringAsync();
                     }
                 }

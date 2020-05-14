@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ELOR.VKAPILib.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
@@ -40,6 +42,15 @@ namespace ELOR.VKAPILib {
             string ds = d.Day <= 9 ? $"0{d.Day}" : d.Day.ToString();
             string ms = d.Month <= 9 ? $"0{d.Month}" : d.Month.ToString();
             return $"{ds}{ms}{d.Year}";
+        }
+
+        internal static async Task EnsureSuccessStatusCodeAsync(this HttpResponseMessage response) {
+            if (response.IsSuccessStatusCode) return;
+
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.Content != null) response.Content.Dispose();
+
+            throw new HttpNonSuccessException(response.StatusCode, "Server returned a non-success response.");
         }
     }
 }
