@@ -49,6 +49,9 @@ namespace ELOR.VKAPILib.Objects {
     public enum UserOnlineStatus {
         Unknown,
 
+        [EnumMember(Value = "not_show")]
+        NotShow,
+
         [EnumMember(Value = "recently")]
         Recently,
 

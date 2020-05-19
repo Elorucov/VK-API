@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 
 namespace ELOR.VKAPILib.Objects {
-    internal class HttpNonSuccessException : Exception {
+    public class HttpNonSuccessException : Exception {
         public HttpStatusCode StatusCode { get; private set; }
 
         internal HttpNonSuccessException(HttpStatusCode statusCode, string content) : base(content) {
