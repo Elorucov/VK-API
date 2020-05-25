@@ -1,5 +1,6 @@
 ﻿using ELOR.VKAPILib.Attributes;
 using ELOR.VKAPILib.Objects;
+using ELOR.VKAPILib.Objects.Upload;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,6 +26,27 @@ namespace ELOR.VKAPILib.Methods {
             if (count > 0) parameters.Add("count", count.ToString());
             if (returnTags) parameters.Add("return_tags", "1");
             return await API.CallMethodAsync<VKList<Document>>(this, parameters);
+        }
+
+        /// <summary>Returns the server address for document upload.</summary>
+        /// <param name="peerId">Destination ID.</param>
+        [Method("getMessagesUploadServer")]
+        public async Task<VkUploadServer> GetMessagesUploadServerAsync(int groupId, int peerId, bool isAudioMessage = false) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            if (groupId > 0) parameters.Add("group_id", peerId.ToString());
+            if (peerId > 0) parameters.Add("peer_id", peerId.ToString());
+            if (isAudioMessage) parameters.Add("type", "audio_message");
+            return await API.CallMethodAsync<VkUploadServer>(this, parameters);
+        }
+
+        /// <summary>Saves a document after uploading it to a server.</summary>
+        [Method("save")]
+        public async Task<DocumentSaveResult> SaveAsync(string file, string title = null, string tags = null) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("file", file);
+            if (!String.IsNullOrEmpty(title)) parameters.Add("title", title);
+            if (!String.IsNullOrEmpty(tags)) parameters.Add("tags", tags);
+            return await API.CallMethodAsync<DocumentSaveResult>(this, parameters);
         }
     }
 }

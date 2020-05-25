@@ -1,5 +1,6 @@
 ﻿using ELOR.VKAPILib.Attributes;
 using ELOR.VKAPILib.Objects;
+using ELOR.VKAPILib.Objects.Upload;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -75,6 +76,26 @@ namespace ELOR.VKAPILib.Methods {
             if (count > 0) parameters.Add("count", count.ToString());
             if (photoSizes) parameters.Add("photo_sizes", "1");
             return await API.CallMethodAsync<VKList<Photo>>(this, parameters);
+        }
+
+        /// <summary>Returns the server address for photo upload in a private message for a user.</summary>
+        /// <param name="peerId">Peer ID (for community messages).</param>
+        [Method("getMessagesUploadServer")]
+        public async Task<PhotoUploadServer> GetMessagesUploadServerAsync(int groupId, int peerId = 0) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            if (groupId > 0) parameters.Add("group_id", peerId.ToString());
+            if (peerId > 0) parameters.Add("peer_id", peerId.ToString());
+            return await API.CallMethodAsync<PhotoUploadServer>(this, parameters);
+        }
+
+        /// <summary>Saves a photo after being successfully uploaded.</summary>
+        [Method("saveMessagesPhoto")]
+        public async Task<PhotoSaveResult> SaveMessagesPhotoAsync(int server, string photo, string hash) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("server", server.ToString());
+            parameters.Add("photo", photo);
+            parameters.Add("hash", hash);
+            return await API.CallMethodAsync<PhotoSaveResult>(this, parameters);
         }
     }
 }
