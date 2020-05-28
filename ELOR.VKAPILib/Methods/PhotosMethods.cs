@@ -83,19 +83,19 @@ namespace ELOR.VKAPILib.Methods {
         [Method("getMessagesUploadServer")]
         public async Task<PhotoUploadServer> GetMessagesUploadServerAsync(int groupId, int peerId = 0) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            if (groupId > 0) parameters.Add("group_id", peerId.ToString());
+            if (groupId > 0) parameters.Add("group_id", groupId.ToString());
             if (peerId > 0) parameters.Add("peer_id", peerId.ToString());
             return await API.CallMethodAsync<PhotoUploadServer>(this, parameters);
         }
 
         /// <summary>Saves a photo after being successfully uploaded.</summary>
         [Method("saveMessagesPhoto")]
-        public async Task<PhotoSaveResult> SaveMessagesPhotoAsync(int server, string photo, string hash) {
+        public async Task<List<PhotoSaveResult>> SaveMessagesPhotoAsync(int server, string photo, string hash) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("server", server.ToString());
             parameters.Add("photo", photo);
             parameters.Add("hash", hash);
-            return await API.CallMethodAsync<PhotoSaveResult>(this, parameters);
+            return await API.CallMethodAsync<List<PhotoSaveResult>>(this, parameters);
         }
     }
 }

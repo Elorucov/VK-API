@@ -33,7 +33,7 @@ namespace ELOR.VKAPILib.Methods {
         [Method("getMessagesUploadServer")]
         public async Task<VkUploadServer> GetMessagesUploadServerAsync(int groupId, int peerId, bool isAudioMessage = false) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            if (groupId > 0) parameters.Add("group_id", peerId.ToString());
+            if (groupId > 0) parameters.Add("group_id", groupId.ToString());
             if (peerId > 0) parameters.Add("peer_id", peerId.ToString());
             if (isAudioMessage) parameters.Add("type", "audio_message");
             return await API.CallMethodAsync<VkUploadServer>(this, parameters);
