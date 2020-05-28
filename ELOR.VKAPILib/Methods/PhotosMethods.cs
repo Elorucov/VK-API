@@ -90,8 +90,9 @@ namespace ELOR.VKAPILib.Methods {
 
         /// <summary>Saves a photo after being successfully uploaded.</summary>
         [Method("saveMessagesPhoto")]
-        public async Task<List<PhotoSaveResult>> SaveMessagesPhotoAsync(int server, string photo, string hash) {
+        public async Task<List<PhotoSaveResult>> SaveMessagesPhotoAsync(int groupId, int server, string photo, string hash) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
+            if (groupId > 0) parameters.Add("group_id", groupId.ToString());
             parameters.Add("server", server.ToString());
             parameters.Add("photo", photo);
             parameters.Add("hash", hash);

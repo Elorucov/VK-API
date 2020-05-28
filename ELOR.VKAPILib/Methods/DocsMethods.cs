@@ -41,8 +41,9 @@ namespace ELOR.VKAPILib.Methods {
 
         /// <summary>Saves a document after uploading it to a server.</summary>
         [Method("save")]
-        public async Task<DocumentSaveResult> SaveAsync(string file, string title = null, string tags = null) {
+        public async Task<DocumentSaveResult> SaveAsync(int groupId, string file, string title = null, string tags = null) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
+            if (groupId > 0) parameters.Add("group_id", groupId.ToString());
             parameters.Add("file", file);
             if (!String.IsNullOrEmpty(title)) parameters.Add("title", title);
             if (!String.IsNullOrEmpty(tags)) parameters.Add("tags", tags);
