@@ -25,5 +25,8 @@ namespace ELOR.VKAPILib.Objects
 
         [JsonIgnore]
         public Uri Uri { get { return new Uri(Link); } }
+
+        [JsonProperty("transcript")]
+        public string Transcript { get; set; }
     }
 }
