@@ -9,7 +9,7 @@ namespace ELOR.VKAPILib.Objects
 {
     public class Audio : AttachmentBase {
         [JsonIgnore]
-        public new string ObjectType { get { return "audio"; } }
+        public string ObjectType { get { return "audio"; } }
 
         [JsonProperty("duration")]
         public int Duration { get; set; }
