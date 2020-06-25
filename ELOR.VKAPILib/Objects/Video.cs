@@ -108,10 +108,5 @@ namespace ELOR.VKAPILib.Objects
             }
             return cps;
         }
-
-        public override string ToString() {
-            string ak = String.IsNullOrEmpty(AccessKey) ? "" : $"_{AccessKey}";
-            return $"video{OwnerId}_{Id}{ak}";
-        }
     }
 }

@@ -97,7 +97,7 @@ namespace ELOR.VKAPILib {
             return prmkv;
         }
 
-        private async Task<string> SendRequestAsync(string method, Dictionary<string, string> parameters = null) {
+        public async Task<string> SendRequestAsync(string method, Dictionary<string, string> parameters = null) {
             string requestUri = $@"https://{Domain}/method/{method}";
 
             HttpClientHandler handler = new HttpClientHandler() {

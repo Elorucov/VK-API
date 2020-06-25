@@ -135,10 +135,5 @@ namespace ELOR.VKAPILib.Objects
             }
             return ps;
         }
-
-        public override string ToString() {
-            string ak = String.IsNullOrEmpty(AccessKey) ? "" : $"_{AccessKey}";
-            return $"photo{OwnerId}_{Id}{ak}";
-        }
     }
 }

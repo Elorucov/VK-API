@@ -78,6 +78,11 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("access_key")]
         public string AccessKey { get; set; }
+
+        public override string ToString() {
+            string ak = String.IsNullOrEmpty(AccessKey) ? "" : $"_{AccessKey}";
+            return $"{ObjectType}{OwnerId}_{Id}{ak}";
+        }
     }
 
     public class Attachment {
