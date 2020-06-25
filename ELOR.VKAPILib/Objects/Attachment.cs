@@ -68,7 +68,7 @@ namespace ELOR.VKAPILib.Objects {
 
     public class AttachmentBase {
         [JsonIgnore]
-        public string ObjectType { get; internal set; }
+        public virtual string ObjectType { get; internal set; }
 
         [JsonProperty("owner_id")]
         public int OwnerId { get; set; }

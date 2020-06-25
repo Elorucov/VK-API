@@ -36,7 +36,7 @@ namespace ELOR.VKAPILib.Objects
 
     public class Photo : AttachmentBase, IPreview {
         [JsonIgnore]
-        public string ObjectType { get { return "photo"; } }
+        public override string ObjectType { get { return "photo"; } }
 
         [JsonProperty("album_id")]
         public int AlbumId { get; set; }

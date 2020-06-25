@@ -30,7 +30,7 @@ namespace ELOR.VKAPILib.Objects
 
     public class Video : AttachmentBase, IPreview {
         [JsonIgnore]
-        public string ObjectType { get { return "video"; } }
+        public override string ObjectType { get { return "video"; } }
 
         [JsonProperty("title")]
         public string Title { get; set; }

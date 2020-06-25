@@ -9,7 +9,7 @@ namespace ELOR.VKAPILib.Objects
 {
     public class Graffiti : AttachmentBase {
         [JsonIgnore]
-        public string ObjectType { get { return "doc"; } }
+        public override string ObjectType { get { return "doc"; } }
 
         [JsonProperty("url")]
         public string Url { get; set; }

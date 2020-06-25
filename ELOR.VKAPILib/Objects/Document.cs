@@ -30,7 +30,7 @@ namespace ELOR.VKAPILib.Objects
 
     public class Document : AttachmentBase, IPreview {
         [JsonIgnore]
-        public new string ObjectType { get { return "doc"; } }
+        public override string ObjectType { get { return "doc"; } }
 
         [JsonProperty("title")]
         public string Title { get; set; }
