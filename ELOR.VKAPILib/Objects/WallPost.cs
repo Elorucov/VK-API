@@ -19,6 +19,9 @@ namespace ELOR.VKAPILib.Objects
 
         [EnumMember(Value = "wphone")]
         WindowsPhone,
+
+        [EnumMember(Value = "admin_app")]
+        AdminApp,
     }
 
     public class PostSource
@@ -27,7 +30,7 @@ namespace ELOR.VKAPILib.Objects
         public string Type { get; set; }
 
         [JsonProperty("platform")]
-        public PostSourcePlatform Platforme { get; set; }
+        public PostSourcePlatform Platform { get; set; }
     }
 
     public class WallPostViews
