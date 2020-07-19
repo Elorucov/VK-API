@@ -35,6 +35,9 @@ namespace ELOR.VKAPILib.Objects {
         [EnumMember(Value = "location")]
         Location,
 
+        [EnumMember(Value = "callback")]
+        Callback,
+
         [EnumMember(Value = "open_app")]
         OpenApp,
 
