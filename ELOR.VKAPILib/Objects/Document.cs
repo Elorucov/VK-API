@@ -24,6 +24,9 @@ namespace ELOR.VKAPILib.Objects
 
     public class DocumentPreview
     {
+        [JsonProperty("graffiti")]
+        public Graffiti Graffiti { get; set; }
+
         [JsonProperty("photo")]
         public Photo Photo { get; set; }
     }

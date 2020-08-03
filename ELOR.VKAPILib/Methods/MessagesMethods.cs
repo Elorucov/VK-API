@@ -440,6 +440,22 @@ namespace ELOR.VKAPILib.Methods {
             return await API.CallMethodAsync<LongPollServerInfo>(this, parameters);
         }
 
+        /// <summary>Returns a list of recently used graffities.</summary>
+        /// <param name="limit">Group ID.</param>
+        [Method("getRecentGraffities")]
+        public async Task<List<Document>> GetRecentGraffitiesAsync(int limit = 20) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("limit", limit.ToString());
+            return await API.CallMethodAsync<List<Document>>(this, parameters);
+        }
+
+        /// <summary>Returns a list of recently used stickers.</summary>
+        [Method("getRecentStickers")]
+        public async Task<VKList<Sticker>> GetRecentStickersAsync() {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            return await API.CallMethodAsync<VKList<Sticker>>(this, parameters);
+        }
+
         /// <summary>Returns information whether sending messages from the community to current user is allowed.</summary>
         /// <param name="groupId">Group ID.</param>
         /// <param name="userId">User ID.</param>

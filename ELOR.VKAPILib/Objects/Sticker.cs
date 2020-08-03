@@ -33,6 +33,9 @@ namespace ELOR.VKAPILib.Objects
         [JsonProperty("sticker_id")]
         public int StickerId { get; set; }
 
+        [JsonProperty("is_allowed")]
+        public int IsAllowed { get; set; }
+
         [JsonProperty("images_with_background")]
         public List<StickerImage> Images { get; set; }
     }
