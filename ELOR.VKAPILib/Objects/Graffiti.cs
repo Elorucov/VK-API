@@ -14,6 +14,9 @@ namespace ELOR.VKAPILib.Objects
         [JsonProperty("url")]
         public string Url { get; set; }
 
+        [JsonProperty("src")]
+        public string Src { get; set; }
+
         [JsonProperty("width")]
         public int Width { get; set; }
 
@@ -21,6 +24,6 @@ namespace ELOR.VKAPILib.Objects
         public int Height { get; set; }
 
         [JsonIgnore]
-        public Uri Uri { get { return new Uri(Url); } }
+        public Uri Uri { get { return !String.IsNullOrEmpty(Src) ? new Uri(Src) : new Uri(Url); } } // VK API devs is suckers.
     }
 }
