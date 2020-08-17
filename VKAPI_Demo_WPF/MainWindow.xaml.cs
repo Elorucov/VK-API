@@ -66,5 +66,12 @@ namespace VKAPI_Demo_WPF {
             MessageBox.Show($"ID: {user.Id}\nName: {user.FirstName}\nLast: {user.LastName}", "Result");
             (sender as Button).IsEnabled = true;
         }
+
+        private async void Polls_Create(object sender, RoutedEventArgs e) {
+            (sender as Button).IsEnabled = false;
+            var poll = await API.Polls.CreateAsync("Test poll from ELOR's VKAPI lib demo", new List<string> { "1", "2", "3" }, true, true, true, 0, 0, API.UserId);
+            MessageBox.Show($"{poll}", "Result");
+            (sender as Button).IsEnabled = true;
+        }
     }
 }

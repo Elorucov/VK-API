@@ -30,7 +30,7 @@ namespace ELOR.VKAPILib.Methods {
             if (disableUnvote) parameters.Add("disable_unvote", "1");
             if (endDate > 0) parameters.Add("end_date", endDate.ToString());
             if (backgroundId > 0) parameters.Add("background_id", backgroundId.ToString());
-            if (ownerId > 0) parameters.Add("owner_id", ownerId.ToString());
+            if (ownerId != 0) parameters.Add("owner_id", ownerId.ToString());
             return await API.CallMethodAsync<Poll>(this, parameters);
         }
 
