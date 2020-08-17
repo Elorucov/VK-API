@@ -21,7 +21,7 @@ namespace ELOR.VKAPILib.Methods {
         /// <param name="backgroundId">background ID for the snippet.</param>
         /// <param name="ownerId">If a poll will be added to a communty it is required to send a negative group identifier. Current user by default.</param>
         [Method("create")]
-        public async Task<Poll> CreateAsync(string question, List<string> answers, bool isAnonymous = false, bool isMultiple = false, bool disableUnvote = false, int endDate = 0, int backgroundId = 0, int ownerId = 0) {
+        public async Task<Poll> CreateAsync(string question, List<string> answers, bool isAnonymous = false, bool isMultiple = false, bool disableUnvote = false, long endDate = 0, int backgroundId = 0, int ownerId = 0) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("question", question);
             parameters.Add("add_answers", JsonConvert.SerializeObject(answers));

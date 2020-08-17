@@ -81,7 +81,7 @@ namespace ELOR.VKAPILib.Objects
 
     public class Poll : AttachmentBase {
         [JsonIgnore]
-        public new string ObjectType { get { return "poll"; } }
+        public override string ObjectType { get { return "poll"; } }
 
         [JsonProperty("created")]
         public int CreatedUnix { get; set; }
