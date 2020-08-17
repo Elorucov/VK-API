@@ -24,6 +24,7 @@ namespace ELOR.VKAPILib {
         public GroupsMethods Groups { get; private set; }
         public MessagesMethods Messages { get; private set; }
         public PhotosMethods Photos { get; private set; }
+        public PollsMethods Polls { get; private set; }
         public UsersMethods Users { get; private set; }
         public VideoMethods Video { get; private set; }
         public MethodsSectionBase Execute { get; private set; }
@@ -74,6 +75,7 @@ namespace ELOR.VKAPILib {
             Groups = new GroupsMethods(this);
             Messages = new MessagesMethods(this);
             Photos = new PhotosMethods(this);
+            Polls = new PollsMethods(this);
             Users = new UsersMethods(this);
             Video = new VideoMethods(this);
             if (executeClass != null) {

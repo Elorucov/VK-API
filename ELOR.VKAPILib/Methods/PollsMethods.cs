@@ -1,5 +1,6 @@
 ﻿using ELOR.VKAPILib.Attributes;
 using ELOR.VKAPILib.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,29 @@ namespace ELOR.VKAPILib.Methods {
     [Section("polls")]
     public class PollsMethods : MethodsSectionBase {
         internal PollsMethods(VKAPI api) : base(api) { }
+
+        /// <summary>Creates polls that can be attached to the users' or communities' posts or messages.</summary>
+        /// <param name="question">question text.</param>
+        /// <param name="answers">available answers list.</param>
+        /// <param name="isAnonymous">true — anonymous poll, participants list is hidden.</param>
+        /// <param name="isMultiple">true — to create a poll with a multiple choice.</param>
+        /// <param name="disableUnvote">true — to disable unvote.</param>
+        /// <param name="endDate">date when the poll should be closed in Unixtime.</param>
+        /// <param name="backgroundId">background ID for the snippet.</param>
+        /// <param name="ownerId">If a poll will be added to a communty it is required to send a negative group identifier. Current user by default.</param>
+        [Method("create")]
+        public async Task<Poll> CreateAsync(string question, List<string> answers, bool isAnonymous = false, bool isMultiple = false, bool disableUnvote = false, int endDate = 0, int backgroundId = 0, int ownerId = 0) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("question", question);
+            parameters.Add("add_answers", JsonConvert.SerializeObject(answers));
+            if (isAnonymous) parameters.Add("is_anonymous", "1");
+            if (isMultiple) parameters.Add("is_multiple", "1");
+            if (disableUnvote) parameters.Add("disable_unvote", "1");
+            if (endDate > 0) parameters.Add("end_date", endDate.ToString());
+            if (backgroundId > 0) parameters.Add("background_id", backgroundId.ToString());
+            if (ownerId > 0) parameters.Add("owner_id", ownerId.ToString());
+            return await API.CallMethodAsync<Poll>(this, parameters);
+        }
 
         /// <summary>Return default backgrounds for polls.</summary>
         [Method("getBackgrounds")]
