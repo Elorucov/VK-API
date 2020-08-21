@@ -625,8 +625,8 @@ namespace ELOR.VKAPILib.Methods {
             parameters.Add("peer_id", peerId.ToString());
             parameters.Add("random_id", randomId.ToString());
             if (!String.IsNullOrEmpty(message)) parameters.Add("message", message);
-            if (latitude > 0) parameters.Add("lat", latitude.ToString());
-            if (longitude > 0) parameters.Add("long", longitude.ToString());
+            if (latitude > 0) parameters.Add("lat", latitude.ToString().Replace(",", "."));
+            if (longitude > 0) parameters.Add("long", longitude.ToString().Replace(",", "."));
             if (!attachment.IsNullOrEmpty()) parameters.Add("attachment", attachment.Combine());
             if (replyTo > 0) parameters.Add("reply_to", replyTo.ToString());
             if (!forwardMessages.IsNullOrEmpty()) parameters.Add("forward_messages", forwardMessages.Combine());
