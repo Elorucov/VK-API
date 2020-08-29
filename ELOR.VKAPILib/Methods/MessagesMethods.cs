@@ -46,7 +46,22 @@ namespace ELOR.VKAPILib.Methods {
         Doc,
 
         [EnumMember(Value = "link")]
-        Link
+        Link,
+
+        [EnumMember(Value = "market")]
+        Market,
+
+        [EnumMember(Value = "wall")]
+        Wall,
+
+        [EnumMember(Value = "share")]
+        Share,
+
+        [EnumMember(Value = "graffiti")]
+        Graffiti,
+
+        [EnumMember(Value = "audio_message")]
+        AudioMessage
     }
 
     [DataContract]
