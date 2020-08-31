@@ -634,7 +634,7 @@ namespace ELOR.VKAPILib.Methods {
         /// <param name="dontParseLinks">true — links will not attach snippet.</param>
         /// <param name="disableMentions">true — mention of user will not generate notification for him.</param>
         [Method("send")]
-        public async Task<int> SendAsync(int groupId, int peerId, int randomId, string message, double latitude, double longitude, List<string> attachment, int replyTo, List<int> forwardMessages, int stickerId, string keyboard = null, string payload = null, bool dontParseLinks = false, bool disableMentions = false, MessageIntent intent = MessageIntent.None) {
+        public async Task<int> SendAsync(int groupId, int peerId, int randomId, string message, double latitude, double longitude, List<string> attachment, int replyTo, List<int> forwardMessages, List<int> groupForwardMessages, int stickerId, string keyboard = null, string payload = null, bool dontParseLinks = false, bool disableMentions = false, MessageIntent intent = MessageIntent.None) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             if (groupId > 0) parameters.Add("group_id", groupId.ToString());
             parameters.Add("peer_id", peerId.ToString());
@@ -645,6 +645,7 @@ namespace ELOR.VKAPILib.Methods {
             if (!attachment.IsNullOrEmpty()) parameters.Add("attachment", attachment.Combine());
             if (replyTo > 0) parameters.Add("reply_to", replyTo.ToString());
             if (!forwardMessages.IsNullOrEmpty()) parameters.Add("forward_messages", forwardMessages.Combine());
+            if (!groupForwardMessages.IsNullOrEmpty()) parameters.Add("group_forward_messages", groupForwardMessages.Combine());
             if (stickerId > 0) parameters.Add("sticker_id", stickerId.ToString());
             if (!String.IsNullOrEmpty(keyboard)) parameters.Add("keyboard", keyboard); // TODO for bots: Parse keyboard object instead of string
             if (!String.IsNullOrEmpty(payload)) parameters.Add("payload", payload);
