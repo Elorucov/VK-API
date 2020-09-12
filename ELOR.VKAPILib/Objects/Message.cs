@@ -123,6 +123,12 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("text")]
         public string Text { get; set; }
+
+        [JsonProperty("conversation_message_id")]
+        public int ConversationMessageId { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 
     public class Message {

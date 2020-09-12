@@ -134,13 +134,13 @@ namespace ELOR.VKAPILib.Methods {
         /// <param name="spam">true — to mark message as spam.</param>
         /// <param name="deleteForAll">true — to delete message for all (in 24 hours from the sending time).</param>
         [Method("delete")]
-        public async Task<bool> DeleteAsync(int groupId, List<int> messageIds, bool spam, bool deleteForAll) {
+        public async Task<Dictionary<string, int>> DeleteAsync(int groupId, List<int> messageIds, bool spam, bool deleteForAll) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             if (groupId > 0) parameters.Add("group_id", groupId.ToString());
             parameters.Add("message_ids", messageIds.Combine());
             if (spam) parameters.Add("spam", "1");
             if (deleteForAll) parameters.Add("delete_for_all", "1");
-            return await API.CallMethodAsync<bool>(this, parameters);
+            return await API.CallMethodAsync<Dictionary<string, int>>(this, parameters);
         }
 
         /// <summary>Deletes a chat's cover picture.</summary>
@@ -212,13 +212,15 @@ namespace ELOR.VKAPILib.Methods {
 
         /// <summary>Returns messages by their ids as part of a conversation.</summary>
         /// <param name="groupId">Group ID (for community messages with a user access token).</param>
+        /// <param name="peerId">Peer ID.</param>
         /// <param name="conversationMessageIds">Conversation message IDs.</param>
         /// <param name="extended">true – return additional information about users and communities in users and communities fields.</param>
         /// <param name="fields">List of additional fields for users and communities.</param>
         [Method("getByConversationMessageId")]
-        public async Task<VKList<Message>> GetByConversationMessageIdAsync(int groupId, List<int> conversationMessageIds, bool extended = false, List<string> fields = null) {
+        public async Task<VKList<Message>> GetByConversationMessageIdAsync(int groupId, int peerId, List<int> conversationMessageIds, bool extended = false, List<string> fields = null) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             if (groupId > 0) parameters.Add("group_id", groupId.ToString());
+            parameters.Add("peer_id", peerId.ToString());
             parameters.Add("conversation_message_ids", conversationMessageIds.Combine());
             if (extended) parameters.Add("extended", "1");
             if (!fields.IsNullOrEmpty()) parameters.Add("fields", fields.Combine());
@@ -634,7 +636,7 @@ namespace ELOR.VKAPILib.Methods {
         /// <param name="dontParseLinks">true — links will not attach snippet.</param>
         /// <param name="disableMentions">true — mention of user will not generate notification for him.</param>
         [Method("send")]
-        public async Task<int> SendAsync(int groupId, int peerId, int randomId, string message, double latitude, double longitude, List<string> attachment, int replyTo, List<int> forwardMessages, List<int> groupForwardMessages, int stickerId, string keyboard = null, string payload = null, bool dontParseLinks = false, bool disableMentions = false, MessageIntent intent = MessageIntent.None) {
+        public async Task<int> SendAsync(int groupId, int peerId, int randomId, string message, double latitude, double longitude, List<string> attachment, int replyTo, List<int> forwardMessages, List<string> groupForwardMessages, int stickerId, string keyboard = null, string payload = null, bool dontParseLinks = false, bool disableMentions = false, MessageIntent intent = MessageIntent.None) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             if (groupId > 0) parameters.Add("group_id", groupId.ToString());
             parameters.Add("peer_id", peerId.ToString());
