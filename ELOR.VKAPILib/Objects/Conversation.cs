@@ -164,6 +164,9 @@ namespace ELOR.VKAPILib.Objects {
         [JsonProperty("unread_count")]
         public int UnreadCount { get; set; }
 
+        [JsonProperty("is_marked_unread")]
+        public bool IsMarkedUnread { get; set; }
+
         [JsonProperty("important")]
         public bool Important { get; set; }
 
@@ -181,6 +184,9 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("chat_settings")]
         public ChatSettings ChatSettings { get; set; }
+
+        [JsonProperty("mentions")]
+        public List<int> Mentions { get; set; }
     }
 
     // Chat
