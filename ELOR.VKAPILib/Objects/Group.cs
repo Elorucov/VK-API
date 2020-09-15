@@ -75,7 +75,7 @@ namespace ELOR.VKAPILib.Objects {
         public int IsAdmin { get; set; }
 
         [JsonProperty("verified")]
-        public int Verified { get; set; }
+        public bool Verified { get; set; }
 
         // admin level
 

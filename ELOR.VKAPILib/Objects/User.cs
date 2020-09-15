@@ -266,6 +266,6 @@ namespace ELOR.VKAPILib.Objects {
         public string MobilePhone { get; set; }
 
         [JsonProperty("verified")]
-        public int Verified { get; set; }
+        public bool Verified { get; set; }
     }
 }
