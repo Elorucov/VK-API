@@ -11,6 +11,19 @@ namespace ELOR.VKAPILib.Methods {
     public class PhotosMethods : MethodsSectionBase {
         internal PhotosMethods(VKAPI api) : base(api) { }
 
+        /// <summary>Allows to copy a photo to the "Saved photos" album.</summary>
+        /// <param name="ownerId">photo's owner ID.</param>
+        /// <param name="photoId">photo ID.</param>
+        /// <param name="accessKey">special access key for private photos.</param>
+        [Method("copy")]
+        public async Task<int> CopyAsync(int ownerId, int photoId, string accessKey = null) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("owner_id", ownerId.ToString());
+            parameters.Add("photo_id", photoId.ToString());
+            if (!String.IsNullOrEmpty(accessKey)) parameters.Add("access_key", accessKey);
+            return await API.CallMethodAsync<int>(this, parameters);
+        }
+
         /// <summary>Returns a list of a user's or community's photo albums.</summary>
         /// <param name="ownerId">ID of the user or community that owns the albums.</param>
         /// <param name="albumIds">Album IDs.</param>
