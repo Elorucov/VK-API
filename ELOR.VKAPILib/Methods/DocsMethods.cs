@@ -11,6 +11,19 @@ namespace ELOR.VKAPILib.Methods {
     public class DocsMethods : MethodsSectionBase {
         internal DocsMethods(VKAPI api) : base(api) { }
 
+        /// <summary>Copies a document to a user's or community's document list.</summary>
+        /// <param name="ownerId">ID of the user or community that owns the document.</param>
+        /// <param name="docId">Document ID.</param>
+        /// <param name="accessKey">Access key. This parameter is required if access_key was returned with the document's data.</param>
+        [Method("add")]
+        public async Task<int> AddAsync(int ownerId, int docId, string accessKey = null) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("owner_id", ownerId.ToString());
+            parameters.Add("doc_id", docId.ToString());
+            if (!String.IsNullOrEmpty(accessKey)) parameters.Add("access_key", accessKey);
+            return await API.CallMethodAsync<int>(this, parameters);
+        }
+
         /// <summary>Returns detailed information about user or community documents.</summary>
         /// <param name="ownerId">ID of the user or community that owns the documents.</param>
         /// <param name="type">Document type. See possible values at vk.com/dev/docs.get</param>
