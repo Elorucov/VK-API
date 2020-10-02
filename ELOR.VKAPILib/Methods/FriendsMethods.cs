@@ -22,6 +22,7 @@ namespace ELOR.VKAPILib.Methods {
         Name,
     }
 
+    [Section("friends")]
     public class FriendsMethods : MethodsSectionBase {
         internal FriendsMethods(VKAPI api) : base(api) { }
 
