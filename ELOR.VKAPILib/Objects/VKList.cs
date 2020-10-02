@@ -18,5 +18,8 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("groups")]
         public List<Group> Groups { get; set; }
+
+        [JsonProperty("conversations")]
+        public List<Conversation> Conversations { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace ELOR.VKAPILib {
         #region Methods
 
         public DocsMethods Docs { get; set; }
+        public FriendsMethods Friends { get; set; }
         public GroupsMethods Groups { get; private set; }
         public MessagesMethods Messages { get; private set; }
         public PhotosMethods Photos { get; private set; }
@@ -72,6 +73,7 @@ namespace ELOR.VKAPILib {
             _domain = domain;
 
             Docs = new DocsMethods(this);
+            Friends = new FriendsMethods(this);
             Groups = new GroupsMethods(this);
             Messages = new MessagesMethods(this);
             Photos = new PhotosMethods(this);
