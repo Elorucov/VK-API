@@ -202,11 +202,13 @@ namespace ELOR.VKAPILib.Methods {
         /// <summary>Edits the title of a chat.</summary>
         /// <param name="chatId">Chat ID.</param>
         /// <param name="title">New title of the chat.</param>
+        /// <param name="permissions">Permissions.</param>
         [Method("editChat")]
-        public async Task<bool> EditChatAsync(int chatId, string title) {
+        public async Task<bool> EditChatAsync(int chatId, string title, string permissions = null) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("chat_id", chatId.ToString());
-            parameters.Add("title", title);
+            if (!String.IsNullOrEmpty(title)) parameters.Add("title", title);
+            if (!String.IsNullOrEmpty(permissions)) parameters.Add("permissions", permissions);
             return await API.CallMethodAsync<bool>(this, parameters);
         }
 
@@ -532,7 +534,7 @@ namespace ELOR.VKAPILib.Methods {
 
         /// <summary>Marks messages as read.</summary>
         /// <param name="groupId">Group ID (for community messages with a user access token).</param>
-        /// <param name="messageIds">IDs of messages to mark as read.</param>
+        /// <param name="startMessageId">IDs of messages to mark as read.</param>
         /// <param name="peerId">Destination ID.</param>
         [Method("markAsRead")]
         public async Task<bool> MarkAsReadAsync(int groupId, int peerId, int startMessageId) {
@@ -540,6 +542,18 @@ namespace ELOR.VKAPILib.Methods {
             if (groupId > 0) parameters.Add("group_id", groupId.ToString());
             parameters.Add("peer_id", peerId.ToString());
             parameters.Add("start_message_id", startMessageId.ToString());
+            return await API.CallMethodAsync<bool>(this, parameters);
+        }
+
+        /// <remarks>This method is undocumented!</remarks>
+        /// <summary>Marks conversation as unread.</summary>
+        /// <param name="groupId">Group ID (for community messages with a user access token).</param>
+        /// <param name="peerId">Destination ID.</param>
+        [Method("markAsUnreadConversation")]
+        public async Task<bool> MarkAsUnreadConversationAsync(int groupId, int peerId) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            if (groupId > 0) parameters.Add("group_id", groupId.ToString());
+            parameters.Add("peer_id", peerId.ToString());
             return await API.CallMethodAsync<bool>(this, parameters);
         }
 
@@ -657,6 +671,22 @@ namespace ELOR.VKAPILib.Methods {
             return await API.CallMethodAsync<int>(this, parameters);
         }
 
+        /// <remarks>This method is undocumented!</remarks>
+        /// <summary>Send event to bot.</summary>
+        /// <param name="peerId">Destination ID.</param>
+        /// <param name="paload">Payload from clicked bot-button.</param>
+        /// <param name="conversationMessageId">Conversation message ID of bot-keyboard owner (if keyboard is inline).</param>
+        /// <param name="authorId">Bot-keyboard's author ID (if it is conversation keyboard).</param>
+        [Method("sendMessageEvent")]
+        public async Task<SendMessageEventResponse> SendMessageEventAsync(int peerId, string payload, int conversationMessageId = 0, int authorId = 0) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("peer_id", peerId.ToString());
+            if (conversationMessageId > 0) parameters.Add("conversation_message_id", conversationMessageId.ToString());
+            if (authorId > 0) parameters.Add("author_id", authorId.ToString());
+            parameters.Add("payload", payload.ToString());
+            return await API.CallMethodAsync<SendMessageEventResponse>(this, parameters);
+        }
+
         /// <summary>Changes the status of a user as typing in a conversation.</summary>
         /// <param name="groupId">Group ID (for community messages with a user access token).</param>
         /// <param name="peerId">Destination ID.</param>
@@ -677,6 +707,22 @@ namespace ELOR.VKAPILib.Methods {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("file", file);
             return await API.CallMethodAsync<SetChatPhotoResponse>(this, parameters);
+        }
+
+        /// <remarks>This method is undocumented!</remarks>
+        /// <summary>Set role for chat member.</summary>
+        /// <param name="groupId">Group ID (for community messages with a user access token).</param>
+        /// <param name="peerId">Peer ID.</param>
+        /// <param name="memberId">Member ID.</param>
+        /// <param name="role">Role (values: admin, member).</param>
+        [Method("setMemberRole")]
+        public async Task<bool> SetMemberRoleAsync(int groupId, int peerId, int memberId, string role) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            if (groupId > 0) parameters.Add("group_id", groupId.ToString());
+            parameters.Add("peer_id", peerId.ToString());
+            parameters.Add("member_id", memberId.ToString());
+            parameters.Add("role", role);
+            return await API.CallMethodAsync<bool>(this, parameters);
         }
 
         /// <summary>Unpins a message.</summary>
