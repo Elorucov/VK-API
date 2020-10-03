@@ -27,12 +27,12 @@ namespace ELOR.VKAPILib.Methods {
         internal FriendsMethods(VKAPI api) : base(api) { }
 
         [Method("add")]
-        public async Task<VKList<User>> AddAsync(int userId, string text = null, bool follow = false) {
+        public async Task<int> AddAsync(int userId, string text = null, bool follow = false) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("user_id", userId.ToString());
             if (!String.IsNullOrEmpty(text)) parameters.Add("text", text);
             if (follow) parameters.Add("follow", "1");
-            return await API.CallMethodAsync<VKList<User>>(this, parameters);
+            return await API.CallMethodAsync<int>(this, parameters);
         }
 
         [Method("get")]
