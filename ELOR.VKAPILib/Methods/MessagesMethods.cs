@@ -675,13 +675,13 @@ namespace ELOR.VKAPILib.Methods {
         /// <summary>Send event to bot.</summary>
         /// <param name="peerId">Destination ID.</param>
         /// <param name="paload">Payload from clicked bot-button.</param>
-        /// <param name="conversationMessageId">Conversation message ID of bot-keyboard owner (if keyboard is inline).</param>
+        /// <param name="messageId">Message ID of bot-keyboard owner (if keyboard is inline).</param>
         /// <param name="authorId">Bot-keyboard's author ID (if it is conversation keyboard).</param>
         [Method("sendMessageEvent")]
-        public async Task<SendMessageEventResponse> SendMessageEventAsync(int peerId, string payload, int conversationMessageId = 0, int authorId = 0) {
+        public async Task<SendMessageEventResponse> SendMessageEventAsync(int peerId, string payload, int messageId = 0, int authorId = 0) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("peer_id", peerId.ToString());
-            if (conversationMessageId > 0) parameters.Add("conversation_message_id", conversationMessageId.ToString());
+            if (messageId > 0) parameters.Add("message_id", messageId.ToString());
             if (authorId > 0) parameters.Add("author_id", authorId.ToString());
             parameters.Add("payload", payload.ToString());
             return await API.CallMethodAsync<SendMessageEventResponse>(this, parameters);

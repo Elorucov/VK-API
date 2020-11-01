@@ -45,7 +45,7 @@ namespace ELOR.VKAPILib {
         private string _accessToken;
         private string _language;
         private string _domain;
-        private static string _version = "5.123";
+        private static string _version = "5.132";
 
         public int UserId { get { return _userId; } }
         public string AccessToken { get { return _accessToken; } }
