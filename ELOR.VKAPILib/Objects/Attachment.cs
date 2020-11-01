@@ -26,6 +26,9 @@ namespace ELOR.VKAPILib.Objects {
         [EnumMember(Value = "audio_message")]
         AudioMessage,
 
+        [EnumMember(Value = "podcast")]
+        Podcast,
+
         [EnumMember(Value = "doc")]
         Document,
 
@@ -61,6 +64,9 @@ namespace ELOR.VKAPILib.Objects {
 
         [EnumMember(Value = "call")]
         Call,
+
+        [EnumMember(Value = "group_call_in_progress")]
+        GroupCallInProgress,
 
         [EnumMember(Value = "event")]
         Event
@@ -104,6 +110,9 @@ namespace ELOR.VKAPILib.Objects {
         [JsonProperty("audio_message")]
         public AudioMessage AudioMessage { get; set; }
 
+        [JsonProperty("podcast")]
+        public Podcast Podcast { get; set; }
+
         [JsonProperty("doc")]
         public Document Document { get; set; }
 
@@ -134,6 +143,9 @@ namespace ELOR.VKAPILib.Objects {
         [JsonProperty("call")]
         public Call Call { get; set; }
 
+        [JsonProperty("group_call_in_progress")]
+        public GroupCallInProgress GroupCallInProgress { get; set; }
+
         [JsonProperty("poll")]
         public Poll Poll { get; set; }
 
@@ -147,6 +159,7 @@ namespace ELOR.VKAPILib.Objects {
                 case "video": return AttachmentType.Video;
                 case "audio": return AttachmentType.Audio;
                 case "audio_message": return AttachmentType.AudioMessage;
+                case "podcast": return AttachmentType.Podcast;
                 case "doc": return AttachmentType.Document;
                 case "graffiti": return AttachmentType.Graffiti;
                 case "link": return AttachmentType.Link;
@@ -160,6 +173,7 @@ namespace ELOR.VKAPILib.Objects {
                 case "event": return AttachmentType.Event;
                 case "gift": return AttachmentType.Gift;
                 case "call": return AttachmentType.Call;
+                case "group_call_in_progress": return AttachmentType.GroupCallInProgress;
                 default: return AttachmentType.Unknown;
             }
         }
