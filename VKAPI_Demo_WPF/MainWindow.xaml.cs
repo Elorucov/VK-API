@@ -73,5 +73,12 @@ namespace VKAPI_Demo_WPF {
             MessageBox.Show($"{poll}", "Result");
             (sender as Button).IsEnabled = true;
         }
+
+        private async void ResolveScreenName(object sender, RoutedEventArgs e) {
+            (sender as Button).IsEnabled = false;
+            var response = await API.Utils.ResolveScreenNameAsync("bagledi");
+            MessageBox.Show($"{response.Type}, {response.ObjectId}", "Result");
+            (sender as Button).IsEnabled = true;
+        }
     }
 }

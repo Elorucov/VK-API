@@ -27,6 +27,7 @@ namespace ELOR.VKAPILib {
         public PhotosMethods Photos { get; private set; }
         public PollsMethods Polls { get; private set; }
         public UsersMethods Users { get; private set; }
+        public UtilsMethods Utils { get; private set; }
         public VideoMethods Video { get; private set; }
         public MethodsSectionBase Execute { get; private set; }
 
@@ -79,6 +80,7 @@ namespace ELOR.VKAPILib {
             Photos = new PhotosMethods(this);
             Polls = new PollsMethods(this);
             Users = new UsersMethods(this);
+            Utils = new UtilsMethods(this);
             Video = new VideoMethods(this);
             if (executeClass != null) {
                 if (executeClass.GetTypeInfo().BaseType == typeof(MethodsSectionBase)) {
@@ -87,7 +89,7 @@ namespace ELOR.VKAPILib {
             }
         }
 
-        private Dictionary<string, string> GetNormalizedParameters(Dictionary<string, string> parameters) {
+        internal Dictionary<string, string> GetNormalizedParameters(Dictionary<string, string> parameters) {
             Dictionary<string, string> prmkv = new Dictionary<string, string>();
 
             foreach (var a in parameters) {
@@ -155,7 +157,7 @@ namespace ELOR.VKAPILib {
                     default: throw apiex;
                 }
             } else if(jr["response"] != null) {
-                return JsonConvert.DeserializeObject<T>(jr["response"].ToString(Formatting.None));
+                return jr["response"].ToObject<T>();
             } else {
                 throw new Exception("Invalid response.");
             }

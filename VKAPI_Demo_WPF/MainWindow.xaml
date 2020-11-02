@@ -26,6 +26,7 @@
                 <Button Margin="6" Content="captcha.force" Click="Captcha_Force"/>
                 <Button Margin="6" Content="users.get" Click="Users_Get"/>
                 <Button Margin="6" Content="polls.create" Click="Polls_Create"/>
+                <Button Margin="6" Content="utils.resolveScreenName" Click="ResolveScreenName"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>
