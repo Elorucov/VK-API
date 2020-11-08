@@ -678,13 +678,13 @@ namespace ELOR.VKAPILib.Methods {
         /// <param name="messageId">Message ID of bot-keyboard owner (if keyboard is inline).</param>
         /// <param name="authorId">Bot-keyboard's author ID (if it is conversation keyboard).</param>
         [Method("sendMessageEvent")]
-        public async Task<SendMessageEventResponse> SendMessageEventAsync(int peerId, string payload, int messageId = 0, int authorId = 0) {
+        public async Task<string> SendMessageEventAsync(int peerId, string payload, int messageId = 0, int authorId = 0) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("peer_id", peerId.ToString());
             if (messageId > 0) parameters.Add("message_id", messageId.ToString());
             if (authorId > 0) parameters.Add("author_id", authorId.ToString());
             parameters.Add("payload", payload.ToString());
-            return await API.CallMethodAsync<SendMessageEventResponse>(this, parameters);
+            return await API.CallMethodAsync<string>(this, parameters);
         }
 
         /// <summary>Changes the status of a user as typing in a conversation.</summary>
