@@ -682,7 +682,7 @@ namespace ELOR.VKAPILib.Methods {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("peer_id", peerId.ToString());
             if (messageId > 0) parameters.Add("message_id", messageId.ToString());
-            if (authorId > 0) parameters.Add("author_id", authorId.ToString());
+            if (authorId != 0) parameters.Add("author_id", authorId.ToString());
             parameters.Add("payload", payload.ToString());
             return await API.CallMethodAsync<string>(this, parameters);
         }
