@@ -107,6 +107,9 @@ namespace ELOR.VKAPILib.Objects {
         [EnumMember(Value = "chat_invite_user_by_message_request")]
         ChatInviteUserByMessageRequest,
 
+        [EnumMember(Value = "accepted_message_request")]
+        AcceptedMessageRequest,
+
         [EnumMember(Value = "chat_screenshot")]
         ChatScreenshot,
 

@@ -32,7 +32,10 @@ namespace ELOR.VKAPILib.Objects {
         Group,
 
         [EnumMember(Value = "email")]
-        Email
+        Email,
+
+        [EnumMember(Value = "contact")]
+        Contact
     }
 
     [DataContract]
