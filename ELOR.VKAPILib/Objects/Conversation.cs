@@ -50,6 +50,18 @@ namespace ELOR.VKAPILib.Objects {
         Left,
     }
 
+    [DataContract]
+    public enum ChatSettingsChangers {
+        [EnumMember(Value = "owner")]
+        Owner,
+
+        [EnumMember(Value = "owner_and_admins")]
+        OwnerAndAdmins,
+
+        [EnumMember(Value = "all")]
+        All,
+    }
+
     public class Peer {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -121,6 +133,29 @@ namespace ELOR.VKAPILib.Objects {
         public bool CanSeeInviteLink { get; set; }
     }
 
+    public class ChatPermissions {
+        [JsonProperty("invite")]
+        public ChatSettingsChangers Invite { get; set; }
+
+        [JsonProperty("change_info")]
+        public ChatSettingsChangers ChangeInfo { get; set; }
+
+        [JsonProperty("change_pin")]
+        public ChatSettingsChangers ChangePin { get; set; }
+
+        [JsonProperty("use_mass_mentions")]
+        public ChatSettingsChangers UseMassMentions { get; set; }
+
+        [JsonProperty("see_invite_link")]
+        public ChatSettingsChangers SeeInviteLink { get; set; }
+
+        [JsonProperty("call")]
+        public ChatSettingsChangers Call { get; set; }
+
+        [JsonProperty("change_admins")]
+        public ChatSettingsChangers ChangeAdmins { get; set; }
+    }
+
     public class ChatSettings {
         [JsonProperty("members_count")]
         public int MembersCount { get; set; }
@@ -148,6 +183,9 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("is_disappearing")]
         public bool IsDisappearing { get; set; }
+
+        [JsonProperty("permissions")]
+        public ChatPermissions Permissions { get; set; }
 
         [JsonProperty("theme")]
         public string Theme { get; set; }
