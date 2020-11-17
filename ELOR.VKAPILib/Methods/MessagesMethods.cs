@@ -275,11 +275,11 @@ namespace ELOR.VKAPILib.Methods {
         /// <param name="link">Invitation link.</param>
         /// <param name="fields">List of additional fields for users and communities.</param>
         [Method("getChatPreview")]
-        public async Task<ChatPreview> GetChatPreviewAsync(string link, List<string> fields = null) {
+        public async Task<ChatPreviewResponse> GetChatPreviewAsync(string link, List<string> fields = null) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("link", link);
             if(!fields.IsNullOrEmpty()) parameters.Add("fields", fields.Combine());
-            return await API.CallMethodAsync<ChatPreview>(this, parameters);
+            return await API.CallMethodAsync<ChatPreviewResponse>(this, parameters);
         }
 
         /// <summary>Returns a list of IDs of users participating in a conversation.</summary>
