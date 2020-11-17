@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ELOR.VKAPILib.Objects.Messages {
     public class JoinChatResponse {
-        [JsonProperty("link")]
-        public string Link { get; internal set; }
+        [JsonProperty("chat_id")]
+        public int ChatId { get; set; }
     }
 }
