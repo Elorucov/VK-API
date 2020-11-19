@@ -27,6 +27,7 @@
                 <Button Margin="6" Content="users.get" Click="Users_Get"/>
                 <Button Margin="6" Content="polls.create" Click="Polls_Create"/>
                 <Button Margin="6" Content="utils.resolveScreenName" Click="ResolveScreenName"/>
+                <Button Margin="6" Content="account.getPrivacySettings" Click="GetPrivacySettings"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

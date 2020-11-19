@@ -20,8 +20,9 @@ namespace ELOR.VKAPILib {
 
         #region Methods
 
-        public DocsMethods Docs { get; set; }
-        public FriendsMethods Friends { get; set; }
+        public AccountMethods Account { get; private set; }
+        public DocsMethods Docs { get; private set; }
+        public FriendsMethods Friends { get; private set; }
         public GroupsMethods Groups { get; private set; }
         public MessagesMethods Messages { get; private set; }
         public PhotosMethods Photos { get; private set; }
@@ -57,6 +58,8 @@ namespace ELOR.VKAPILib {
         public static string UserAgent { get; set; }
         public static string Version { get { return _version; } }
 
+        private HttpClient HttpClient;
+
         #endregion
 
         #region Events
@@ -73,6 +76,12 @@ namespace ELOR.VKAPILib {
             _language = language;
             _domain = domain;
 
+            HttpClientHandler handler = new HttpClientHandler() {
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            };
+            HttpClient = new HttpClient(handler);
+
+            Account = new AccountMethods(this);
             Docs = new DocsMethods(this);
             Friends = new FriendsMethods(this);
             Groups = new GroupsMethods(this);
@@ -106,22 +115,16 @@ namespace ELOR.VKAPILib {
         public async Task<string> SendRequestAsync(string method, Dictionary<string, string> parameters = null) {
             string requestUri = $@"https://{Domain}/method/{method}";
 
-            HttpClientHandler handler = new HttpClientHandler() {
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-            };
+            HttpClient.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue { NoCache = true };
 
-            using (var httpClient = new HttpClient(handler)) {
-                httpClient.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue { NoCache = true };
+            HttpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip,deflate");
+            if (!String.IsNullOrEmpty(UserAgent)) HttpClient.DefaultRequestHeaders.Add("User-Agent", UserAgent);
 
-                httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip,deflate");
-                if (!String.IsNullOrEmpty(UserAgent)) httpClient.DefaultRequestHeaders.Add("User-Agent", UserAgent);
-
-                using (HttpRequestMessage hmsg = new HttpRequestMessage(HttpMethod.Post, new Uri(requestUri))) {
-                    hmsg.Content = new FormUrlEncodedContent(parameters);
-                    using (var resp = await httpClient.SendAsync(hmsg)) {
-                        await resp.EnsureSuccessStatusCodeAsync();
-                        return await resp.Content.ReadAsStringAsync();
-                    }
+            using (HttpRequestMessage hmsg = new HttpRequestMessage(HttpMethod.Post, new Uri(requestUri))) {
+                hmsg.Content = new FormUrlEncodedContent(parameters);
+                using (var resp = await HttpClient.SendAsync(hmsg)) {
+                    await resp.EnsureSuccessStatusCodeAsync();
+                    return await resp.Content.ReadAsStringAsync();
                 }
             }
         }

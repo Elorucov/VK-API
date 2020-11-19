@@ -80,5 +80,37 @@ namespace VKAPI_Demo_WPF {
             MessageBox.Show($"{response.Type}, {response.ObjectId}", "Result");
             (sender as Button).IsEnabled = true;
         }
+
+        private async void GetPrivacySettings(object sender, RoutedEventArgs e) {
+            (sender as Button).IsEnabled = false;
+            var response = await API.Account.GetPrivacySettingsAsync();
+
+            string resp = "";
+            foreach (var section in response.Sections) {
+                var settings = from s in response.Settings where s.Section == section.Name select s;
+                if (settings.Count() == 0) continue;
+
+                if (!String.IsNullOrEmpty(resp)) resp += "\n";
+                resp += $"=== {section.Title} ===\n";
+
+                foreach (var setting in settings) {
+                    string value = "";
+                    if (setting.Type == ELOR.VKAPILib.Objects.PrivacySettingValueType.Binary) {
+                        value = setting.Value.IsEnabled.ToString();
+                    } else if (setting.Type == ELOR.VKAPILib.Objects.PrivacySettingValueType.List) {
+                        if (setting.Value.Category != null) {
+                            var category = response.SupportedCategories.Where(c => c.Value == setting.Value.Category).FirstOrDefault();
+                            value = category.Title;
+                        } else if (setting.Value.Owners != null) {
+                            value = $"{setting.Value.Owners.Allowed.Count} user(s)";
+                        }
+                    }
+                    resp += $"{setting.Title}: {value}\n";
+                }
+            }
+
+            MessageBox.Show(resp, "Result");
+            (sender as Button).IsEnabled = true;
+        }
     }
 }
