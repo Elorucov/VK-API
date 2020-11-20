@@ -16,5 +16,13 @@ namespace ELOR.VKAPILib.Methods {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             return await API.CallMethodAsync<PrivacyResponse>(this, parameters);
         }
+
+        [Method("setPrivacy")]
+        public async Task<PrivacySettingValue> SetPrivacyAsync(string key, string value) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("key", key);
+            parameters.Add("value", value);
+            return await API.CallMethodAsync<PrivacySettingValue>(this, parameters);
+        }
     }
 }
