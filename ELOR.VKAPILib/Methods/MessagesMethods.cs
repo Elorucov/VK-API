@@ -104,6 +104,18 @@ namespace ELOR.VKAPILib.Methods {
             return await API.CallMethodAsync<bool>(this, parameters);
         }
 
+        /// <remarks>This method is undocumented!</remarks>
+        /// <summary>Create new template.</summary>
+        /// <param name="groupId">Group ID.</param>
+        [Method("addTemplate")]
+        public async Task<AddTemplateResponse> AddTemplateAsync(int groupId, string name, string text) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("group_id", groupId.ToString());
+            parameters.Add("name", name);
+            parameters.Add("text", text);
+            return await API.CallMethodAsync<AddTemplateResponse>(this, parameters);
+        }
+
         /// <summary>Allows sending messages from community to the current user.</summary>
         /// <param name="groupId">Group ID.</param>
         /// <param name="key">Random string, can be used for the user identification. It returns with message_allow event in Callback API.</param>
@@ -163,6 +175,17 @@ namespace ELOR.VKAPILib.Methods {
             return await API.CallMethodAsync<bool>(this, parameters);
         }
 
+        /// <remarks>This method is undocumented!</remarks>
+        /// <summary>Delete template.</summary>
+        /// <param name="groupId">Group ID.</param>
+        [Method("deleteTemplate")]
+        public async Task<bool> DeleteTemplateAsync(int groupId, int templateId) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("group_id", groupId.ToString());
+            parameters.Add("template_id", templateId.ToString());
+            return await API.CallMethodAsync<bool>(this, parameters);
+        }
+
         /// <summary>Denies sending message from community to the current user.</summary>
         /// <param name="groupId">Group ID.</param>
         [Method("denyMessagesFromGroup")]
@@ -209,6 +232,19 @@ namespace ELOR.VKAPILib.Methods {
             parameters.Add("chat_id", chatId.ToString());
             if (!String.IsNullOrEmpty(title)) parameters.Add("title", title);
             if (!String.IsNullOrEmpty(permissions)) parameters.Add("permissions", permissions);
+            return await API.CallMethodAsync<bool>(this, parameters);
+        }
+
+        /// <remarks>This method is undocumented!</remarks>
+        /// <summary>Edit template.</summary>
+        /// <param name="groupId">Group ID.</param>
+        [Method("editTemplate")]
+        public async Task<bool> EditTemplateAsync(int groupId, int templateId, string name, string text) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("group_id", groupId.ToString());
+            parameters.Add("template_id", templateId.ToString());
+            parameters.Add("name", name);
+            parameters.Add("text", text);
             return await API.CallMethodAsync<bool>(this, parameters);
         }
 
@@ -473,6 +509,17 @@ namespace ELOR.VKAPILib.Methods {
         public async Task<VKList<Sticker>> GetRecentStickersAsync() {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             return await API.CallMethodAsync<VKList<Sticker>>(this, parameters);
+        }
+
+        /// <remarks>This method is undocumented!</remarks>
+        /// <summary>Returns templates.</summary>
+        /// <param name="groupId">Group ID.</param>
+        [Method("getTemplates")]
+        public async Task<VKList<MessageTemplate>> GetTemplatesAsync(int groupId, int extended = 1) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("group_id", groupId.ToString());
+            if (extended != 0) parameters.Add("extended", "1");
+            return await API.CallMethodAsync<VKList<MessageTemplate>>(this, parameters);
         }
 
         /// <summary>Returns information whether sending messages from the community to current user is allowed.</summary>
