@@ -56,6 +56,12 @@ namespace ELOR.VKAPILib.Objects
         [JsonIgnore]
         public Size PreviewImageSize { get { return Image.First().Size; } }
 
+        [JsonProperty("width")]
+        public double Width { get; set; }
+
+        [JsonProperty("height")]
+        public double Height { get; set; }
+
         [JsonProperty("date")]
         public int DateUnix { get; set; }
 
