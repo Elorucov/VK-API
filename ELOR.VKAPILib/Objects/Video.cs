@@ -92,6 +92,9 @@ namespace ELOR.VKAPILib.Objects
         [JsonProperty("platform")]
         public string Platform { get; set; }
 
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
         [JsonProperty("processing")]
         public int Processing { get; set; }
 

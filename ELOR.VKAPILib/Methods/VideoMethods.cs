@@ -35,13 +35,14 @@ namespace ELOR.VKAPILib.Methods {
         /// <param name="count">Number of videos to return.</param>
         /// <param name="extended">true — to return an extended response with additional fields.</param>
         [Method("get")]
-        public async Task<VKList<Video>> GetAsync(int ownerId, int albumId, int offset = 0, int count = 50, bool extended = false) {
+        public async Task<VKList<Video>> GetAsync(int ownerId, string videos = null, int albumId = 0, int offset = 0, int count = 50, bool extended = false) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("owner_id", ownerId.ToString());
-            parameters.Add("album_id", albumId.ToString());
-            if(offset > 0) parameters.Add("offset", offset.ToString());
-            if(count > 0) parameters.Add("count", count.ToString());
-            if(extended) parameters.Add("extended", "1");
+            if (!String.IsNullOrEmpty(videos)) parameters.Add("videos", videos);
+            if (albumId > 0) parameters.Add("album_id", albumId.ToString());
+            if (offset > 0) parameters.Add("offset", offset.ToString());
+            if (count > 0) parameters.Add("count", count.ToString());
+            if (extended) parameters.Add("extended", "1");
             return await API.CallMethodAsync<VKList<Video>>(this, parameters);
         }
 
