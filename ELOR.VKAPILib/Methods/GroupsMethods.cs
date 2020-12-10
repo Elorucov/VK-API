@@ -1,5 +1,6 @@
 ﻿using ELOR.VKAPILib.Attributes;
 using ELOR.VKAPILib.Objects;
+using ELOR.VKAPILib.Objects.Groups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,21 @@ namespace ELOR.VKAPILib.Methods {
             parameters.Add("offset", offset.ToString());
             parameters.Add("count", count.ToString());
             return await API.CallMethodAsync<VKList<Group>>(this, parameters);
+        }
+
+        /// <summary>Returns a list of users on a community blacklist.</summary>
+        /// <param name="groupId">Group ID.</param>
+        /// <param name="offset">Offset needed to return a specific subset of communities.</param>
+        /// <param name="count">Number of communities to return.</param>
+        /// <param name="fields">Group fields to return.</param>
+        [Method("getBanned")]
+        public async Task<VKList<BannedMembers>> GetBannedAsync(int groupId, int offset = 0, int count = 20, List<string> fields = null) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("group_id", groupId.ToString());
+            parameters.Add("offset", offset.ToString());
+            parameters.Add("count", count.ToString());
+            if (!fields.IsNullOrEmpty()) parameters.Add("fields", fields.Combine());
+            return await API.CallMethodAsync<VKList<BannedMembers>>(this, parameters);
         }
 
         /// <summary>Returns information about communities by their IDs.</summary>

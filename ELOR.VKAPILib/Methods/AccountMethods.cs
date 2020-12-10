@@ -11,6 +11,20 @@ namespace ELOR.VKAPILib.Methods {
     public class AccountMethods : MethodsSectionBase {
         internal AccountMethods(VKAPI api) : base(api) { }
 
+        [Method("ban")]
+        public async Task<bool> BanAsync(int ownerId) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("owner_id", ownerId.ToString());
+            return await API.CallMethodAsync<bool>(this, parameters);
+        }
+
+        [Method("getBanned")]
+        public async Task<VKList<int>> GetBannedAsync(List<string> fields = null) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            if (!fields.IsNullOrEmpty()) parameters.Add("fields", fields.Combine());
+            return await API.CallMethodAsync<VKList<int>>(this, parameters);
+        }
+
         [Method("getPrivacySettings")]
         public async Task<PrivacyResponse> GetPrivacySettingsAsync() {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -23,6 +37,13 @@ namespace ELOR.VKAPILib.Methods {
             parameters.Add("key", key);
             parameters.Add("value", value);
             return await API.CallMethodAsync<PrivacySettingValue>(this, parameters);
+        }
+
+        [Method("unban")]
+        public async Task<bool> UnbanAsync(int ownerId) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("owner_id", ownerId.ToString());
+            return await API.CallMethodAsync<bool>(this, parameters);
         }
     }
 }
