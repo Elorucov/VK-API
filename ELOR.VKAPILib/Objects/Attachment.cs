@@ -69,7 +69,10 @@ namespace ELOR.VKAPILib.Objects {
         GroupCallInProgress,
 
         [EnumMember(Value = "event")]
-        Event
+        Event,
+
+        [EnumMember(Value = "curator")]
+        Curator
     }
 
     public class AttachmentBase {
@@ -152,6 +155,9 @@ namespace ELOR.VKAPILib.Objects {
         [JsonProperty("event")]
         public Event Event { get; set; }
 
+        [JsonProperty("curator")]
+        public Curator Curator { get; set; }
+
         private AttachmentType GetAttachmentEnum() {
             switch(TypeString) {
                 case "photo": return AttachmentType.Photo;
@@ -174,6 +180,7 @@ namespace ELOR.VKAPILib.Objects {
                 case "gift": return AttachmentType.Gift;
                 case "call": return AttachmentType.Call;
                 case "group_call_in_progress": return AttachmentType.GroupCallInProgress;
+                case "curator": return AttachmentType.Curator;
                 default: return AttachmentType.Unknown;
             }
         }
