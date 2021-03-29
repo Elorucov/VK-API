@@ -191,6 +191,14 @@ namespace ELOR.VKAPILib.Objects {
         public string Theme { get; set; }
     }
 
+    public class SortId {
+        [JsonProperty("major_id")]
+        public int MajorId { get; set; }
+
+        [JsonProperty("minor_id")]
+        public int MinorId { get; set; }
+    }
+
     public class Conversation {
 
         [JsonProperty("peer")]
@@ -213,6 +221,9 @@ namespace ELOR.VKAPILib.Objects {
 
         [JsonProperty("unanswered")]
         public bool Unanswered { get; set; }
+
+        [JsonProperty("sort_id")]
+        public SortId SortId { get; set; }
 
         [JsonProperty("push_settings")]
         public PushSettings PushSettings { get; set; }
