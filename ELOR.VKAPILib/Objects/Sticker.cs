@@ -39,4 +39,12 @@ namespace ELOR.VKAPILib.Objects
         [JsonProperty("images_with_background")]
         public List<StickerImage> Images { get; set; }
     }
+
+    public class StickerDictionary {
+        [JsonProperty("words")]
+        public List<string> Words { get; set; }
+
+        [JsonProperty("stickers")]
+        public List<Sticker> Stickers { get; set; }
+    }
 }
