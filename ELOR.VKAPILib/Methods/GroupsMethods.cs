@@ -20,10 +20,10 @@ namespace ELOR.VKAPILib.Methods {
         /// <param name="offset">Offset needed to return a specific subset of communities.</param>
         /// <param name="count">Number of communities to return.</param>
         [Method("get")]
-        public async Task<VKList<Group>> GetAsync(int userId, bool extended = false, List<string> fields = null, List<string> filter = null, int offset = 0, int count = 1000) {
+        public async Task<VKList<Group>> GetAsync(int userId, List<string> fields = null, List<string> filter = null, int offset = 0, int count = 1000) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("user_id", userId.ToString());
-            if (extended) parameters.Add("extended", "1");
+            parameters.Add("extended", "1");
             if (!fields.IsNullOrEmpty()) parameters.Add("fields", fields.Combine());
             if (!filter.IsNullOrEmpty()) parameters.Add("filter", filter.Combine());
             parameters.Add("offset", offset.ToString());
@@ -50,22 +50,22 @@ namespace ELOR.VKAPILib.Methods {
         /// <param name="groupIds">Group IDs.</param>
         /// <param name="fields">Group fields to return.</param>
         [Method("getById")]
-        public async Task<List<Group>> GetByIdAsync(List<int> groupIds, List<string> fields = null) {
+        public async Task<GroupsResponse> GetByIdAsync(List<int> groupIds, List<string> fields = null) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("group_ids", groupIds.Combine());
             if (!fields.IsNullOrEmpty()) parameters.Add("fields", fields.Combine());
-            return await API.CallMethodAsync<List<Group>>(this, parameters);
+            return await API.CallMethodAsync<GroupsResponse>(this, parameters);
         }
 
         /// <summary>Returns information about community by ID.</summary>
         /// <param name="groupId">Group ID.</param>
         /// <param name="fields">Group fields to return.</param>
         [Method("getById")]
-        public async Task<Group> GetByIdAsync(int groupId, List<string> fields = null) {
+        public async Task<GroupsResponse> GetByIdAsync(int groupId, List<string> fields = null) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("group_id", groupId.ToString());
             if (!fields.IsNullOrEmpty()) parameters.Add("fields", fields.Combine());
-            return (await API.CallMethodAsync<List<Group>>(this, parameters)).First();
+            return (await API.CallMethodAsync<GroupsResponse>(this, parameters));
         }
     }
 }

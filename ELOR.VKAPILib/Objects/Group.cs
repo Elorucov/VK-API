@@ -131,6 +131,13 @@ namespace ELOR.VKAPILib.Objects {
         public string Status { get; set; }
     }
 
+    public class GroupsResponse {
+        [JsonProperty("groups")]
+        public List<Group> Groups { get; set; }
+
+        [JsonProperty("profiles")]
+        public List<User> Profiles { get; set; }
+    }
 
     // Event object in messages attachments
     public class Event {
