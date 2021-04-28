@@ -107,6 +107,9 @@ namespace ELOR.VKAPILib.Objects
         [JsonProperty("multiple")]
         public bool Multiple { get; set; }
 
+        [JsonProperty("disable_unvote")]
+        public bool DisableUnvote { get; set; }
+
         [JsonProperty("end_date")]
         public int EndDateUnix { get; set; }
 

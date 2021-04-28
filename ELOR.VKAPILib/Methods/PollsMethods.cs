@@ -40,5 +40,20 @@ namespace ELOR.VKAPILib.Methods {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             return await API.CallMethodAsync<List<PollBackground>>(this, parameters);
         }
+
+        /// <summary>Returns detailed information about a poll by its ID.</summary>
+        /// <param name="ownerId">ID of the user or community that owns the poll.</param>
+        /// <param name="pollId">Poll ID.</param>
+        /// <param name="extended">true —  to return additional fields for users.</param>
+        /// <param name="fields">Profile fields to return.</param>
+        [Method("create")]
+        public async Task<Poll> GetByIdAsync(int ownerId, int pollId, bool extended = false, List<string> fields = null) {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("owner_id", ownerId.ToString());
+            parameters.Add("poll_id", pollId.ToString());
+            if (extended) parameters.Add("extended", "1");
+            if (!fields.IsNullOrEmpty()) parameters.Add("fields", fields.Combine());
+            return await API.CallMethodAsync<Poll>(this, parameters);
+        }
     }
 }
