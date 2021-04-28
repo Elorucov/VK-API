@@ -46,7 +46,7 @@ namespace ELOR.VKAPILib.Methods {
         /// <param name="pollId">Poll ID.</param>
         /// <param name="extended">true —  to return additional fields for users.</param>
         /// <param name="fields">Profile fields to return.</param>
-        [Method("create")]
+        [Method("getById")]
         public async Task<Poll> GetByIdAsync(int ownerId, int pollId, bool extended = false, List<string> fields = null) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("owner_id", ownerId.ToString());
