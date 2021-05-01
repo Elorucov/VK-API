@@ -139,5 +139,8 @@ namespace ELOR.VKAPILib.Objects
 
         [JsonProperty("profiles")]
         public List<User> Profiles { get; set; }
+
+        [JsonProperty("groups")]
+        public List<Group> Groups { get; set; }
     }
 }
