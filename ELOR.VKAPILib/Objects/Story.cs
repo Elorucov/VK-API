@@ -95,7 +95,7 @@ namespace ELOR.VKAPILib.Objects {
 
     public class Story : AttachmentBase {
         [JsonIgnore]
-        public new string ObjectType { get { return "story"; } }
+        public override string ObjectType { get { return "story"; } }
 
         [JsonProperty("can_see")]
         public int CanSee { get; set; }
