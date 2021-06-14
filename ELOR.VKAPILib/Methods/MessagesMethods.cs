@@ -584,11 +584,13 @@ namespace ELOR.VKAPILib.Methods {
         /// <param name="startMessageId">IDs of messages to mark as read.</param>
         /// <param name="peerId">Destination ID.</param>
         [Method("markAsRead")]
-        public async Task<bool> MarkAsReadAsync(int groupId, int peerId, int startMessageId) {
+        public async Task<bool> MarkAsReadAsync(int groupId, int peerId, int startMessageId, bool markConversationAsRead = false) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             if (groupId > 0) parameters.Add("group_id", groupId.ToString());
             parameters.Add("peer_id", peerId.ToString());
-            parameters.Add("start_message_id", startMessageId.ToString());
+            if (startMessageId > 0) parameters.Add("start_message_id", startMessageId.ToString());
+            if (markConversationAsRead) parameters.Add("mark_conversation_as_read", "1");
+
             return await API.CallMethodAsync<bool>(this, parameters);
         }
 
