@@ -169,10 +169,10 @@ namespace ELOR.VKAPILib.Methods {
         /// <summary>Deletes private messages in a conversation.</summary>
         /// <param name="peerId">Destination ID.</param>
         [Method("deleteConversation")]
-        public async Task<bool> DeleteConversationAsync(int peerId) {
+        public async Task<DeleteConversationResponse> DeleteConversationAsync(int peerId) {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("peer_id", peerId.ToString());
-            return await API.CallMethodAsync<bool>(this, parameters);
+            return await API.CallMethodAsync<DeleteConversationResponse>(this, parameters);
         }
 
         /// <remarks>This method is undocumented!</remarks>
